@@ -74,11 +74,6 @@ async def main_menu(message):
     await start_message.age.set()
 
 
-# @dp.message_handler(text='Рассчитать')
-# async def main_menu(message):
-#     await message.answer('Выберите опцию:')
-#     await start_message.age.set()
-
 
 @dp.callback_query_handler(text='calories')
 async def set_age(call):
@@ -89,7 +84,6 @@ async def set_age(call):
 @dp.message_handler(state=UserState.age)
 async def set_growth(message, state):
     await state.update_data(age=int(message.text))
-    # data_age = await state.get_data()
     await message.answer('Введите свой рост:')
     await UserState.growth.set()
 
@@ -97,7 +91,6 @@ async def set_growth(message, state):
 @dp.message_handler(state=UserState.growth)
 async def set_weight(message, state):
     await state.update_data(growth=int(message.text))
-    # data_growth = await state.get_data()
     await message.answer(f'Введите свой вес:')
     await UserState.weight.set()
 
@@ -119,7 +112,6 @@ async def send_calories(message, state):
     await state.finish()
 
 
-# "10 x вес (кг) + 6,25 x рост (см) – 5 x возраст (г) – 161"
 
 @dp.message_handler(text='Информация')
 async def inform(message):
@@ -144,7 +136,6 @@ async def get_buying_list(message: types.Message):
         await message.answer(response)
         with open(f'files1\product{product[0]}.jpg', "rb") as img:
             await message.answer_photo(img, )
-    # await message.answer(response)
 
 
 @dp.callback_query_handler(text="product_buying")
